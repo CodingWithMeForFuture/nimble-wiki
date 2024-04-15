@@ -1,76 +1,77 @@
 ---
-description: A short guide to mining on Nimble
+描述: 简明 Nimble 挖矿指南
 ---
 
-# Mining on Nimble
+# Nimble 挖矿
 
-Use these instructions to configure your mining hardware and mine NIM.
+使用这些配置说明去配置的硬件来挖NIM。
 
-Instructions are available for Linux, Windows 11, and Mac.
+说明适用于 Linux, Windows 11, and Mac。
 
-## System Specs
+## 系统要求
 
-Recommended
+推荐
 
 * RTX 3090+ GPU
 * Core i7 13700
 * 16GB RAM
 * 256 GB disk space
 
-Minimum
+最低配置
 
 * RTX 2080+ GPU (Linux/Windows), or M1/M2/M3 Mac chips
 * Core i5 7400
 * 16GB RAM
 * 256 GB disk space
 
-## Installing on Windows 11
+## 在 Windows 11 安装
 
-### Install Golang
+### 安装 Golang
 
-* Install Windows Subsystem for Linux (WSL)
+* 安装windows 子系统 (WSL)
   * [https://learn.microsoft.com/en-us/windows/wsl/install](https://learn.microsoft.com/en-us/windows/wsl/install)
-* Nimble requires Go 1.22.1. If you already have a previous Go version installed, start by removing it
+* 挖 Nimble 必需 Go 1.22.1. 如果你已经安装了golang老版本, 先删了它
   * `sudo apt-get remove golang-go`
   * `sudo rm -rf /usr/local/go`
-* Once completed, open a terminal and execute the following commands
+* 完成后, 打开终端，执行下面命令
   * `cd /usr/local`
   * `sudo wget https://go.dev/dl/go1.22.1.linux-amd64.tar.gz`
   * `sudo tar -C /usr/local -xzf go1.22.1.linux-amd64.tar.gz`
   * `export PATH=$PATH:/usr/local/go/bin`
   * `go version`
 
-It should display the go version 1.22.1
+应该能在终端看到显示: the go version 1.22.1
 
-### Create Wallet
+### 创建钱包
 
-Note: Git is required for the remaining setup steps.
+提示: 其余步骤需要使用git.
 
-* Open a terminal
-* Execute the following commands to download wallet CLI
+* 打开终端
+* 执行下面的指令去下载钱包 CLI
   * `mkdir $HOME/nimble && cd $HOME/nimble`
   * `git clone https://github.com/nimble-technology/wallet-public.git`
   * `cd wallet-public`
   * `make install`
-* Locate this path and confirm it exists (replace \<you> with your username)
+*  确保下面位置的文件存在 (用你的用户名替换 \<you>)
   * `/home/<you>/go/bin/nimble-networkd`
-* Execute the following command to create your wallet. Give your wallet a name, such as 'ilovenimble'.
+* 执行下面命令出创建你的钱包. 输入钱包名称, 譬如 'ilovenimble'.
   * `[nimble-networkd path]/nimble-networkd keys add ilovenimble`
   * `(Type your passphrase)`
   * `(Save the seed phrase somewhere safe)`
 
-The “address: nimblexxxx” output means your Nimble Network wallet address was created successfully!
+输出打印“address: nimblexxxx” 意味着你的钱包地址成功生成!
 
-### Start Mining
+### 开始挖矿
 
-Note: python3.9 (or above) and pip3 are required for the remaining steps
 
-* Open a terminal window
-* Install python3 venv
+提示: python3.9 (或 更高版本) 和 pip3 在其余步骤必需要的
+
+* 打开终端窗口
+* 下载 python3 venv
   * `sudo apt update`
   * `sudo apt install python3-venv`
 
-> If you encounter a failure while installing python3-venv, please execute the following commands.
+> 如果安装python3-venv挂了，或者有报错，清执行下面命令.
 >
 > ```shell
 > sudo apt-get install software-properties-common
@@ -78,7 +79,7 @@ Note: python3.9 (or above) and pip3 are required for the remaining steps
 > sudo apt install python3-venv
 > ```
 
-* Download and run nimble miner
+* 下载并安装挖矿程序
   * `cd $HOME/nimble`
   * `git clone https://github.com/nimble-technology/nimble-miner-public.git`
   * `cd nimble-miner-public`
@@ -86,47 +87,47 @@ Note: python3.9 (or above) and pip3 are required for the remaining steps
   * `source ./nimenv_localminers/bin/activate`
   * `make run addr=<copy paste your “nimblexxx” wallet address here>`
 
-To resume mining after your machine disconnects, re-run the command:
+机器挂了重新挖矿，重新跑这个命令：
 
-`make run addr=<copy paste your “nimblexxx” wallet address here>`
+`make run addr=<复制粘贴你的钱包地址 “nimblexxx”>`
 
-## Installing on Mac
+## 在 Mac 安装
 
-### Install Golang
+### 安装 Golang
 
-* Download and install Golang (**v1.22 or higher**)
+* 下载安装 Golang (**v1.22 或更高**)
   * [https://golang.org/dl/](https://golang.org/dl/)
-* Open a terminal window
-* Execute the following commands
+* 打开终端
+* 执行下面命令
   1. `mkdir ~/go`
   2. `export GOPATH=$HOME/go`
   3. `export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin`
   4. `go version`
 
-It should display the go version, ex. `goX.X.X darwin/amd64`
+他应该显示go的版本, 比如. `goX.X.X darwin/amd64`
 
-### Create Wallet
+### 创建钱包
 
-Note: Git is required for the remaining setup steps.
+提示: 其余步骤需要使用git.
 
-* Open a terminal
-* Execute the following commands to download wallet CLI
+* 打开终端
+* 执行下面命令去下载钱包cli工具
   * `mkdir $HOME/nimble && cd $HOME/nimble`
   * `git clone https://github.com/nimble-technology/wallet-public.git`
   * `cd wallet-public`
   * `make install`
-* Locate this path and confirm it exists (replace \<you> with your username)
+* 确保下面位置的文件存在 (用你的用户名替换 \<you>)
   * `/Users/<you>/go/bin/nimble-networkd`
-* Execute the following command to create your wallet. Give your wallet a name, such as 'ilovenimble'.
+* 执行下面命令出创建你的钱包. 输入钱包名称, 譬如 'ilovenimble'.
   * `[nimble-networkd path]/nimble-networkd keys add ilovenimble`
   * `(Type your passphrase)`
   * `(Save the seed phrase somewhere safe)`
 
-The “address: nimblexxxx” output means your Nimble Network wallet address was created successfully!
+输出打印“address: nimblexxxx” 意味着你的钱包地址成功生成!
 
-### Start Mining
+### 开始挖矿
 
-* Open a terminal window
+* 打开终端，执行下面命令
   * `cd $HOME/nimble`
   * `git clone https://github.com/nimble-technology/nimble-miner-public.git`
   * `cd nimble-miner-public`
@@ -134,16 +135,16 @@ The “address: nimblexxxx” output means your Nimble Network wallet address wa
   * `source ./nimenv_localminers/bin/activate`
   * `make run addr=<copy paste your “nimblexxx” wallet address here>`
 
-To resume mining after your machine disconnects, re-run the command:
+机器挂了重新挖矿，重新跑这个命令：
 
-`make run addr=<copy paste your “nimblexxx” wallet address here>`
+`make run addr=<复制粘贴你的钱包地址 “nimblexxx”>`
 
-## Installing on Linux
+## 在 Linux 上安装和挖矿
 
-### Install Golang
+### 安装 Golang
 
-* Open a terminal
-* Execute the following commands
+* 打开终端
+* 执行下面命令
   * `sudo apt update`
   * `sudo apt install golang`
   * `export GOPATH=$HOME/go`
@@ -152,34 +153,34 @@ To resume mining after your machine disconnects, re-run the command:
 
 It should display the go version.
 
-### Create Wallet
+### 创建钱包
 
-Note: Git is required for the remaining setup steps.
+提示: 其余步骤需要使用git.
 
-* Open a terminal
-* Execute the following commands to download wallet CLI
+* 打开终端
+* 执行下面的命令去下载钱包 CLI
   * `mkdir $HOME/nimble && cd $HOME/nimble`
   * `git clone https://github.com/nimble-technology/wallet-public.git`
   * `cd wallet-public`
   * `make install`
-* Locate this path and confirm it exists (replace \<you> with your username)
+*  确保下面位置的文件存在 (用你的用户名替换 \<you>)
   * `/home/<you>/go/bin/nimble-networkd`
   * Copy this path value and use it in the next step.
-* Execute the following command to create your wallet. Give your wallet a name, such as 'ilovenimble'.
+* 执行下面命令出创建你的钱包. 输入钱包名称, 譬如 'ilovenimble'.
   * `[nimble-networkd path]/nimble-networkd keys add ilovenimble`
   * `(Type your passphrase)`
   * `(Save the seed phrase somewhere safe)` The “address: nimblexxxx” output means your Nimble Network wallet address was created successfully!
 
-### Start Mining
+### 开始挖矿
 
-Note: python3.9 (or above) and pip3 are required for the remaining steps
+提示: python3.9 (或 更高版本) 和 pip3 在其余步骤必需要的
 
-* Open a terminal window
-* Install python3 venv for Linux
+* 打开终端窗口，运行：
+* 为 Linux 安装 python3 venv
   * `sudo apt update`
   * `sudo apt install python3-venv`
 
-> If you encounter a failure while installing python3-venv, please execute the following commands.
+> 如果安装python3-venv挂了，或者有报错，清执行下面命令.
 >
 > ```shell
 > sudo apt-get install software-properties-common
@@ -187,7 +188,7 @@ Note: python3.9 (or above) and pip3 are required for the remaining steps
 > sudo apt install python3-venv
 > ```
 
-* Open a terminal window
+* 打开终端窗口，运行：
   * `cd $HOME/nimble`
   * `git clone https://github.com/nimble-technology/nimble-miner-public.git`
   * `cd nimble-miner-public`
@@ -195,12 +196,12 @@ Note: python3.9 (or above) and pip3 are required for the remaining steps
   * `source ./nimenv_localminers/bin/activate`
   * `make run addr=<copy paste your “nimblexxx” wallet address here>`
 
-To resume mining after your machine disconnects, re-run the command:
+机器挂了重新挖矿，重新跑这个命令：
 
-`make run addr=<copy paste your “nimblexxx” wallet address here>`
+`make run addr=<复制粘贴你的钱包地址 “nimblexxx”>`
 
-## Congrats 😘
+## 祝贺 😘
 
-You are now mining NIM!
+你现在可以挖 NIM!
 
-For assistance, find us in our Discord server - [https://discord.gg/nimble](https://discord.gg/nimble)
+如需帮助，请访问我们的 Discord 服务器 - [https://discord.gg/nimble](https://discord.gg/nimble)
